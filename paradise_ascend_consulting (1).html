@@ -90,17 +90,7 @@
         }
 
         .brand-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent), var(--portal-color));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: white;
-            box-shadow: 0 0 15px rgba(10, 132, 255, 0.4);
+            display: none;
         }
 
         .nav-router {
@@ -491,13 +481,65 @@
         .reader-paper li { margin-bottom: 8px; }
         .reader-paper a { color: var(--accent); text-decoration: none; }
 
+        /* Hamburger mobile menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            background: transparent;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0; right: 0;
+            background: rgba(10,10,10,0.97);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 16px 24px 24px;
+            z-index: 999;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-route-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--glass-border);
+            cursor: pointer;
+            text-align: left;
+            font-family: inherit;
+            transition: color 0.2s;
+        }
+        .mobile-route-btn:last-child { border-bottom: none; }
+        .mobile-route-btn:hover, .mobile-route-btn.active { color: white; }
+
         @media (max-width: 768px) {
-            .app-nav { padding: 0 20px; }
-            .nav-router { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 2000; background: rgba(30,30,30,0.8); }
-            .workspace { padding: 20px; margin-top: 60px; margin-bottom: 80px;}
-            .portal-wrapper { padding: 24px; }
-            .reader-paper { padding: 32px 24px; }
-            .reader-toolbar { flex-direction: column; gap: 16px; align-items: stretch; text-align: center;}
+            .app-nav { padding: 0 20px; height: 60px; }
+            .nav-router { display: none; }
+            .user-avatar { display: none; }
+            .hamburger { display: flex; }
+            .workspace { padding: 16px; margin-top: 60px; margin-bottom: 40px; }
+            .portal-wrapper { padding: 20px; }
+            .reader-paper { padding: 28px 20px; }
+            .reader-toolbar { flex-direction: column; gap: 12px; align-items: stretch; text-align: center; }
+            .form-row { grid-template-columns: 1fr; gap: 16px; }
         }
     
         /* ================= SCROLL TO TOP BUTTON ================= */
@@ -629,7 +671,7 @@
 
     <div class="app-nav">
         <div class="brand">
-            <div class="brand-icon">A</div>
+            <div class="brand-icon"></div>
             <span style="font-weight:700; margin-left: 2px;">Ascend</span> <span style="font-weight:400; color:var(--text-muted); margin-left:2px;">by Paradise</span>
         </div>
         <div class="nav-router">
@@ -641,6 +683,17 @@
         <div class="user-avatar">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
         </div>
+        <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-route-btn active" onclick="navigate('overview'); toggleMenu()">Overview</button>
+        <button class="mobile-route-btn" onclick="navigate('initiate'); toggleMenu()">Initiate</button>
+        <button class="mobile-route-btn" onclick="navigate('resources'); toggleMenu()">Resources</button>
+        <button class="mobile-route-btn" onclick="window.location.href='global-calculator/index.html'">Calculator</button>
     </div>
 
     <div class="workspace">
@@ -977,6 +1030,78 @@
                     <div class="file-details">
                         <div class="f-name">University of Arts London</div>
                         <div class="f-meta"><span class="vault-tag">Specs</span> PDF Document</div>
+                        <div class="f-download">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                            Read Securely
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openReader('Viena 2027: Costos Estudiantiles', 'data-vienna', 'Actualización Costos Estudiantiles Austria 2027.md')" class="file-card">
+                    <div class="file-icon-box">🇦🇹</div>
+                    <div class="file-details">
+                        <div class="f-name">Viena 2027: Costos Estudiantiles</div>
+                        <div class="f-meta"><span class="vault-tag">Finance</span> Markdown Source</div>
+                        <div class="f-download">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                            Read Securely
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openReader('Lisboa 2027: Guía Estratégica', 'data-lisbon', 'Costos Estudiantiles Lisboa 2027.md')" class="file-card">
+                    <div class="file-icon-box">🇵🇹</div>
+                    <div class="file-details">
+                        <div class="f-name">Lisboa 2027: Guía Estratégica</div>
+                        <div class="f-meta"><span class="vault-tag">Guide</span> Markdown Source</div>
+                        <div class="f-download">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                            Read Securely
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openReader('París 2027: Guía y Presupuesto', 'data-paris', 'Estudiar en París 2027_ Guía Estratégica y Presupuesto.md')" class="file-card">
+                    <div class="file-icon-box">🇫🇷</div>
+                    <div class="file-details">
+                        <div class="f-name">París 2027: Guía y Presupuesto</div>
+                        <div class="f-meta"><span class="vault-tag">Finance</span> Markdown Source</div>
+                        <div class="f-download">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                            Read Securely
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openReader('Tokio 2027: Guía Estratégica', 'data-tokyo', 'Estudiar en Tokio 2027_ Guía Estratégica Actualizada.md')" class="file-card">
+                    <div class="file-icon-box">🇯🇵</div>
+                    <div class="file-details">
+                        <div class="f-name">Tokio 2027: Guía Estratégica</div>
+                        <div class="f-meta"><span class="vault-tag">Guide</span> Markdown Source</div>
+                        <div class="f-download">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                            Read Securely
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openReader('Toronto 2027: Presupuesto Universitario', 'data-toronto', 'Presupuesto Universitario Toronto 2027.md')" class="file-card">
+                    <div class="file-icon-box">🇨🇦</div>
+                    <div class="file-details">
+                        <div class="f-name">Toronto 2027: Presupuesto Universitario</div>
+                        <div class="f-meta"><span class="vault-tag">Data</span> Markdown Source</div>
+                        <div class="f-download">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                            Read Securely
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openReader('Irlanda 2027: Proyección de Costos', 'data-ireland', 'Proyección Costos Estudiantiles Irlanda 2027.md')" class="file-card">
+                    <div class="file-icon-box">🇮🇪</div>
+                    <div class="file-details">
+                        <div class="f-name">Irlanda 2027: Proyección de Costos</div>
+                        <div class="f-meta"><span class="vault-tag">Finance</span> Markdown Source</div>
                         <div class="f-download">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
                             Read Securely
@@ -2083,5 +2208,21 @@ A comprehensive breakdown of the creative ecosystem, portfolio requirements, and
 </div>
 
 </body>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburgerBtn');
+    if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.classList.remove('open');
+    }
+});
+</script>
 
 </html>
