@@ -1,0 +1,936 @@
+[
+  {
+    "name": "NEW YORK",
+    "currency": "USD",
+    "region": "Americas",
+    "profiles": [
+      {
+        "name": "Columbia / NYU (Privada Élite)",
+        "costs": {
+          "housing": 20500,
+          "food": 0,
+          "transport": 1500,
+          "health": 4850,
+          "leisure": 18846,
+          "tuition": 74500
+        },
+        "totalMonth": 120196,
+        "totalMonthUSD": 120196
+      },
+      {
+        "name": "Fordham / Pace (Privada Media)",
+        "costs": {
+          "housing": 21500,
+          "food": 0,
+          "transport": 1500,
+          "health": 4400,
+          "leisure": 15525,
+          "tuition": 57500
+        },
+        "totalMonth": 100425,
+        "totalMonthUSD": 100425
+      },
+      {
+        "name": "CUNY (Pública NYC)",
+        "costs": {
+          "housing": 21000,
+          "food": 0,
+          "transport": 1500,
+          "health": 3750,
+          "leisure": 10850,
+          "tuition": 20750
+        },
+        "totalMonth": 57850,
+        "totalMonthUSD": 57850
+      },
+      {
+        "name": "SUNY (Pública Estado)",
+        "costs": {
+          "housing": 17250,
+          "food": 0,
+          "transport": 650,
+          "health": 3250,
+          "leisure": 10275,
+          "tuition": 20250
+        },
+        "totalMonth": 51675,
+        "totalMonthUSD": 51675
+      }
+    ]
+  },
+  {
+    "name": "CAMBRIDGE",
+    "currency": "USD",
+    "region": "Americas",
+    "profiles": [
+      {
+        "name": "Escenario 1: On-Campus (Residencial Harvard/MIT)",
+        "costs": {
+          "housing": 15800,
+          "food": 9800,
+          "transport": 450,
+          "health": 4800,
+          "leisure": 21267,
+          "tuition": 66400
+        },
+        "totalMonth": 118517,
+        "totalMonthUSD": 118517
+      },
+      {
+        "name": "Escenario 2: Off-Campus (Compartido/Austero)",
+        "costs": {
+          "housing": 14400,
+          "food": 5850,
+          "transport": 1080,
+          "health": 4800,
+          "leisure": 20603,
+          "tuition": 66400
+        },
+        "totalMonth": 113133,
+        "totalMonthUSD": 113133
+      },
+      {
+        "name": "Escenario 3: Off-Campus (Independiente/Moderado)",
+        "costs": {
+          "housing": 28800,
+          "food": 9000,
+          "transport": 1800,
+          "health": 4800,
+          "leisure": 26242,
+          "tuition": 66400
+        },
+        "totalMonth": 137042,
+        "totalMonthUSD": 137042
+      }
+    ]
+  },
+  {
+    "name": "LOS ANGELES",
+    "currency": "USD",
+    "region": "Americas",
+    "profiles": [
+      {
+        "name": "Costo Mensual (USD)",
+        "costs": {
+          "housing": 4100,
+          "food": 925,
+          "transport": 825,
+          "health": 300,
+          "leisure": 7395,
+          "tuition": 0
+        },
+        "totalMonth": 13545,
+        "totalMonthUSD": 13545
+      }
+    ]
+  },
+  {
+    "name": "CHICAGO",
+    "currency": "USD",
+    "region": "Americas",
+    "profiles": [
+      {
+        "name": "UChicago (Privada Élite)",
+        "costs": {
+          "housing": 1400,
+          "food": 5800,
+          "transport": 400,
+          "health": 5600,
+          "leisure": 14308,
+          "tuition": 80700
+        },
+        "totalMonth": 108208,
+        "totalMonthUSD": 108208
+      },
+      {
+        "name": "DePaul (Privada Urbana)",
+        "costs": {
+          "housing": 1600,
+          "food": 6200,
+          "transport": 400,
+          "health": 3200,
+          "leisure": 11825,
+          "tuition": 50500
+        },
+        "totalMonth": 73725,
+        "totalMonthUSD": 73725
+      },
+      {
+        "name": "UIC (Pública - Residente)*",
+        "costs": {
+          "housing": 1200,
+          "food": 5400,
+          "transport": 400,
+          "health": 1500,
+          "leisure": 8592,
+          "tuition": 19000
+        },
+        "totalMonth": 36092,
+        "totalMonthUSD": 36092
+      },
+      {
+        "name": "Loyola (Privada Católica)",
+        "costs": {
+          "housing": 1250,
+          "food": 5800,
+          "transport": 400,
+          "health": 4000,
+          "leisure": 12258,
+          "tuition": 59500
+        },
+        "totalMonth": 83208,
+        "totalMonthUSD": 83208
+      }
+    ]
+  },
+  {
+    "name": "SAN FRANCISCO",
+    "currency": "USD",
+    "region": "Americas",
+    "profiles": [
+      {
+        "name": "Rango de Costo Anual",
+        "costs": {
+          "housing": 16250,
+          "food": 9000,
+          "transport": 0,
+          "health": 10700,
+          "leisure": 14095,
+          "tuition": 68438
+        },
+        "totalMonth": 118482,
+        "totalMonthUSD": 118482
+      }
+    ]
+  },
+  {
+    "name": "DURHAM",
+    "currency": "USD",
+    "region": "Americas",
+    "profiles": [
+      {
+        "name": "Costo Mensual Est.",
+        "costs": {
+          "housing": 1650,
+          "food": 750,
+          "transport": 650,
+          "health": 395,
+          "leisure": 4215,
+          "tuition": 0
+        },
+        "totalMonth": 7660,
+        "totalMonthUSD": 7660
+      },
+      {
+        "name": "Costo Anual (12 Meses)",
+        "costs": {
+          "housing": 19800,
+          "food": 9000,
+          "transport": 7800,
+          "health": 4740,
+          "leisure": 11475,
+          "tuition": 0
+        },
+        "totalMonth": 52815,
+        "totalMonthUSD": 52815
+      }
+    ]
+  },
+  {
+    "name": "MADRID",
+    "currency": "EUR",
+    "region": "Europe",
+    "profiles": [
+      {
+        "name": "Rango Económico (Getafe/Leganés)",
+        "costs": {
+          "housing": 475,
+          "food": 225,
+          "transport": 10,
+          "health": 53,
+          "leisure": 661,
+          "tuition": 0
+        },
+        "totalMonth": 1423,
+        "totalMonthUSD": 1537
+      },
+      {
+        "name": "Rango Centro (Moncloa/Chamberí/Salamanca)",
+        "costs": {
+          "housing": 801,
+          "food": 275,
+          "transport": 10,
+          "health": 53,
+          "leisure": 337,
+          "tuition": 0
+        },
+        "totalMonth": 1476,
+        "totalMonthUSD": 1594
+      }
+    ]
+  },
+  {
+    "name": "BARCELONA",
+    "currency": "EUR",
+    "region": "Europe",
+    "profiles": [
+      {
+        "name": "Rango Low Cost (Ahorrador)",
+        "costs": {
+          "housing": 515,
+          "food": 220,
+          "transport": 16,
+          "health": 0,
+          "leisure": 1186,
+          "tuition": 0
+        },
+        "totalMonth": 1937,
+        "totalMonthUSD": 2092
+      },
+      {
+        "name": "Rango Estándar (Medio)",
+        "costs": {
+          "housing": 725,
+          "food": 320,
+          "transport": 16,
+          "health": 0,
+          "leisure": 411,
+          "tuition": 0
+        },
+        "totalMonth": 1472,
+        "totalMonthUSD": 1590
+      },
+      {
+        "name": "Rango Premium / Confort",
+        "costs": {
+          "housing": 451,
+          "food": 450,
+          "transport": 60,
+          "health": 0,
+          "leisure": 733,
+          "tuition": 0
+        },
+        "totalMonth": 1693,
+        "totalMonthUSD": 1829
+      },
+      {
+        "name": "Observaciones 2027",
+        "costs": {
+          "housing": 650,
+          "food": 9,
+          "transport": 3288,
+          "health": 0,
+          "leisure": 21,
+          "tuition": 0
+        },
+        "totalMonth": 3968,
+        "totalMonthUSD": 4286
+      }
+    ]
+  },
+  {
+    "name": "BERLIN",
+    "currency": "EUR",
+    "region": "Europe",
+    "profiles": [
+      {
+        "name": "Presupuesto Austero (Supervivencia)",
+        "costs": {
+          "housing": 550,
+          "food": 200,
+          "transport": 0,
+          "health": 135,
+          "leisure": 1536,
+          "tuition": 0
+        },
+        "totalMonth": 2421,
+        "totalMonthUSD": 2614
+      },
+      {
+        "name": "Presupuesto Cómodo (Estándar)",
+        "costs": {
+          "housing": 426,
+          "food": 350,
+          "transport": 0,
+          "health": 145,
+          "leisure": 2196,
+          "tuition": 0
+        },
+        "totalMonth": 3116,
+        "totalMonthUSD": 3366
+      }
+    ]
+  },
+  {
+    "name": "AMSTERDAM",
+    "currency": "EUR",
+    "region": "Europe",
+    "profiles": [
+      {
+        "name": "Rango Bajo (Austeridad)",
+        "costs": {
+          "housing": 750,
+          "food": 300,
+          "transport": 40,
+          "health": 70,
+          "leisure": 1623,
+          "tuition": 1500
+        },
+        "totalMonth": 4283,
+        "totalMonthUSD": 4626
+      },
+      {
+        "name": "Rango Medio (Estándar)",
+        "costs": {
+          "housing": 1,
+          "food": 400,
+          "transport": 120,
+          "health": 165,
+          "leisure": 2529,
+          "tuition": 1800
+        },
+        "totalMonth": 5015,
+        "totalMonthUSD": 5416
+      },
+      {
+        "name": "Rango Alto (Confort)",
+        "costs": {
+          "housing": 2,
+          "food": 550,
+          "transport": 250,
+          "health": 180,
+          "leisure": 3786,
+          "tuition": 2500
+        },
+        "totalMonth": 7267,
+        "totalMonthUSD": 7849
+      }
+    ]
+  },
+  {
+    "name": "DUBLIN",
+    "currency": "EUR",
+    "region": "Europe",
+    "profiles": [
+      {
+        "name": "Económico (Compartido)",
+        "costs": {
+          "housing": 850,
+          "food": 250,
+          "transport": 45,
+          "health": 25,
+          "leisure": 1740,
+          "tuition": 0
+        },
+        "totalMonth": 2910,
+        "totalMonthUSD": 3143
+      },
+      {
+        "name": "Medio (Estándar)",
+        "costs": {
+          "housing": 1100,
+          "food": 350,
+          "transport": 65,
+          "health": 45,
+          "leisure": 2560,
+          "tuition": 0
+        },
+        "totalMonth": 4120,
+        "totalMonthUSD": 4450
+      },
+      {
+        "name": "Premium (Privado)",
+        "costs": {
+          "housing": 2,
+          "food": 500,
+          "transport": 100,
+          "health": 70,
+          "leisure": 863,
+          "tuition": 0
+        },
+        "totalMonth": 1535,
+        "totalMonthUSD": 1658
+      }
+    ]
+  },
+  {
+    "name": "VIENA",
+    "currency": "EUR",
+    "region": "Europe",
+    "profiles": [
+      {
+        "name": "Perfil Austero (Min)",
+        "costs": {
+          "housing": 380,
+          "food": 220,
+          "transport": 25,
+          "health": 78,
+          "leisure": 993,
+          "tuition": 0
+        },
+        "totalMonth": 1696,
+        "totalMonthUSD": 1832
+      },
+      {
+        "name": "Perfil Estándar (Avg)",
+        "costs": {
+          "housing": 580,
+          "food": 350,
+          "transport": 25,
+          "health": 78,
+          "leisure": 1663,
+          "tuition": 0
+        },
+        "totalMonth": 2696,
+        "totalMonthUSD": 2912
+      },
+      {
+        "name": "Perfil Confort (Max)",
+        "costs": {
+          "housing": 880,
+          "food": 500,
+          "transport": 50,
+          "health": 160,
+          "leisure": 2820,
+          "tuition": 0
+        },
+        "totalMonth": 4410,
+        "totalMonthUSD": 4763
+      }
+    ]
+  },
+  {
+    "name": "LISBOA",
+    "currency": "EUR",
+    "region": "Europe",
+    "profiles": [
+      {
+        "name": "Orçamento Económico (Quarto Partilhado, Cantina)",
+        "costs": {
+          "housing": 0,
+          "food": 200,
+          "transport": 12,
+          "health": 10,
+          "leisure": 1036,
+          "tuition": 0
+        },
+        "totalMonth": 1257,
+        "totalMonthUSD": 1357
+      },
+      {
+        "name": "Orçamento Moderado (Quarto Privado/Residência, Cozinha Própria)",
+        "costs": {
+          "housing": 0,
+          "food": 275,
+          "transport": 20,
+          "health": 33,
+          "leisure": 1082,
+          "tuition": 0
+        },
+        "totalMonth": 1409,
+        "totalMonthUSD": 1522
+      },
+      {
+        "name": "Orçamento Conforto (Estúdio, Jantar Fora Frequentemente)",
+        "costs": {
+          "housing": 0,
+          "food": 400,
+          "transport": 45,
+          "health": 65,
+          "leisure": 445,
+          "tuition": 0
+        },
+        "totalMonth": 955,
+        "totalMonthUSD": 1031
+      }
+    ]
+  },
+  {
+    "name": "ZURICH",
+    "currency": "CHF",
+    "region": "Europe",
+    "profiles": [
+      {
+        "name": "Perfil Austero (CHF)",
+        "costs": {
+          "housing": 750,
+          "food": 350,
+          "transport": 65,
+          "health": 110,
+          "leisure": 1935,
+          "tuition": 0
+        },
+        "totalMonth": 3210,
+        "totalMonthUSD": 3563
+      },
+      {
+        "name": "Perfil Moderado (CHF)",
+        "costs": {
+          "housing": 1175,
+          "food": 550,
+          "transport": 95,
+          "health": 320,
+          "leisure": 3670,
+          "tuition": 0
+        },
+        "totalMonth": 5810,
+        "totalMonthUSD": 6449
+      },
+      {
+        "name": "Perfil Confort (CHF)",
+        "costs": {
+          "housing": 2050,
+          "food": 850,
+          "transport": 150,
+          "health": 490,
+          "leisure": 6060,
+          "tuition": 0
+        },
+        "totalMonth": 9600,
+        "totalMonthUSD": 10656
+      }
+    ]
+  },
+  {
+    "name": "LONDRES",
+    "currency": "GBP",
+    "region": "Europe",
+    "profiles": [
+      {
+        "name": "Costo Mensual (Estimado)",
+        "costs": {
+          "housing": 1100,
+          "food": 215,
+          "transport": 120,
+          "health": 0,
+          "leisure": 2215,
+          "tuition": 0
+        },
+        "totalMonth": 3650,
+        "totalMonthUSD": 4599
+      }
+    ]
+  },
+  {
+    "name": "BEIJIN",
+    "currency": "CNY",
+    "region": "Asia-Pac",
+    "profiles": [
+      {
+        "name": "Subcategoría / Ítem",
+        "costs": {
+          "housing": 0,
+          "food": 0,
+          "transport": 0,
+          "health": 0,
+          "leisure": 6,
+          "tuition": 0
+        },
+        "totalMonth": 6,
+        "totalMonthUSD": 1
+      },
+      {
+        "name": "Perfil Austero (Becario/Dormitorio)",
+        "costs": {
+          "housing": 1850,
+          "food": 1050,
+          "transport": 125,
+          "health": 70,
+          "leisure": 5540,
+          "tuition": 0
+        },
+        "totalMonth": 8635,
+        "totalMonthUSD": 1209
+      },
+      {
+        "name": "Perfil Estándar (Piso Compartido)",
+        "costs": {
+          "housing": 4500,
+          "food": 600,
+          "transport": 275,
+          "health": 70,
+          "leisure": 15200,
+          "tuition": 0
+        },
+        "totalMonth": 20645,
+        "totalMonthUSD": 2890
+      },
+      {
+        "name": "Perfil Premium (Apartamento Privado)",
+        "costs": {
+          "housing": 11250,
+          "food": 0,
+          "transport": 200,
+          "health": 70,
+          "leisure": 33745,
+          "tuition": 0
+        },
+        "totalMonth": 45265,
+        "totalMonthUSD": 6337
+      },
+      {
+        "name": "Análisis de Contexto 2027",
+        "costs": {
+          "housing": 0,
+          "food": 6,
+          "transport": 0,
+          "health": 800,
+          "leisure": 231,
+          "tuition": 0
+        },
+        "totalMonth": 1037,
+        "totalMonthUSD": 145
+      }
+    ]
+  },
+  {
+    "name": "MONTERREY",
+    "currency": "MXN",
+    "region": "Americas",
+    "profiles": [
+      {
+        "name": "Perfil Austero (UANL / Público)",
+        "costs": {
+          "housing": 4500,
+          "food": 4700,
+          "transport": 1200,
+          "health": 0,
+          "leisure": 16700,
+          "tuition": 0
+        },
+        "totalMonth": 27100,
+        "totalMonthUSD": 1599
+      },
+      {
+        "name": "Perfil Medio (Tec/UDEM Compartido)",
+        "costs": {
+          "housing": 9500,
+          "food": 9000,
+          "transport": 4000,
+          "health": 1300,
+          "leisure": 39400,
+          "tuition": 0
+        },
+        "totalMonth": 63200,
+        "totalMonthUSD": 3729
+      },
+      {
+        "name": "Perfil Alto (Tec/UDEM Privado)",
+        "costs": {
+          "housing": 22000,
+          "food": 17500,
+          "transport": 7500,
+          "health": 3500,
+          "leisure": 84500,
+          "tuition": 0
+        },
+        "totalMonth": 135000,
+        "totalMonthUSD": 7965
+      }
+    ]
+  },
+  {
+    "name": "ISTANBUL",
+    "currency": "USD",
+    "region": "Europe",
+    "profiles": [
+      {
+        "name": "Perfil Austeridad Estratégica",
+        "costs": {
+          "housing": 200,
+          "food": 180,
+          "transport": 20,
+          "health": 35,
+          "leisure": 679,
+          "tuition": 0
+        },
+        "totalMonth": 1114,
+        "totalMonthUSD": 1114
+      },
+      {
+        "name": "Perfil Estándar Confortable",
+        "costs": {
+          "housing": 625,
+          "food": 350,
+          "transport": 40,
+          "health": 35,
+          "leisure": 1746,
+          "tuition": 0
+        },
+        "totalMonth": 2796,
+        "totalMonthUSD": 2796
+      },
+      {
+        "name": "Perfil Premium / Expat",
+        "costs": {
+          "housing": 1250,
+          "food": 600,
+          "transport": 150,
+          "health": 120,
+          "leisure": 3680,
+          "tuition": 0
+        },
+        "totalMonth": 5800,
+        "totalMonthUSD": 5800
+      }
+    ]
+  },
+  {
+    "name": "TOKYO",
+    "currency": "JPY",
+    "region": "Asia-Pac",
+    "profiles": [
+      {
+        "name": "Costo Estimado (JPY)",
+        "costs": {
+          "housing": 92500,
+          "food": 70000,
+          "transport": 6500,
+          "health": 2000,
+          "leisure": 229000,
+          "tuition": 0
+        },
+        "totalMonth": 400000,
+        "totalMonthUSD": 2640
+      }
+    ]
+  },
+  {
+    "name": "AUCKLAND",
+    "currency": "NZD",
+    "region": "Asia-Pac",
+    "profiles": [
+      {
+        "name": "Perfil Ahorrador (NZD)",
+        "costs": {
+          "housing": 245,
+          "food": 130,
+          "transport": 25,
+          "health": 18,
+          "leisure": 3627,
+          "tuition": 0
+        },
+        "totalMonth": 4045,
+        "totalMonthUSD": 2427
+      },
+      {
+        "name": "Perfil Medio (NZD)",
+        "costs": {
+          "housing": 350,
+          "food": 210,
+          "transport": 40,
+          "health": 18,
+          "leisure": 5409,
+          "tuition": 0
+        },
+        "totalMonth": 6027,
+        "totalMonthUSD": 3616
+      },
+      {
+        "name": "Perfil Confort (NZD)",
+        "costs": {
+          "housing": 565,
+          "food": 320,
+          "transport": 60,
+          "health": 18,
+          "leisure": 7698,
+          "tuition": 0
+        },
+        "totalMonth": 8661,
+        "totalMonthUSD": 5197
+      }
+    ]
+  },
+  {
+    "name": "RIYADH",
+    "currency": "SAR",
+    "region": "MEA",
+    "profiles": [
+      {
+        "name": "Escenario A: Becario (Universidad Pública - KSU/PNU)",
+        "costs": {
+          "housing": 0,
+          "food": 7750,
+          "transport": 1010,
+          "health": 0,
+          "leisure": 8639,
+          "tuition": 50
+        },
+        "totalMonth": 17449,
+        "totalMonthUSD": 4711
+      },
+      {
+        "name": "Escenario B: Autofinanciado (Universidad Privada - Alfaisal/PSU)",
+        "costs": {
+          "housing": 52500,
+          "food": 17000,
+          "transport": 6750,
+          "health": 4250,
+          "leisure": 39483,
+          "tuition": 99500
+        },
+        "totalMonth": 219483,
+        "totalMonthUSD": 59261
+      },
+      {
+        "name": "Análisis y Proyección 2027",
+        "costs": {
+          "housing": 8,
+          "food": 1,
+          "transport": 260,
+          "health": 0,
+          "leisure": 78,
+          "tuition": 1547
+        },
+        "totalMonth": 1894,
+        "totalMonthUSD": 511
+      }
+    ]
+  },
+  {
+    "name": "RIO DE JANEIRO",
+    "currency": "BRL",
+    "region": "Americas",
+    "profiles": [
+      {
+        "name": "Ítem Específico",
+        "costs": {
+          "housing": 0,
+          "food": 0,
+          "transport": 0,
+          "health": 0,
+          "leisure": 0,
+          "tuition": 0
+        },
+        "totalMonth": 0,
+        "totalMonthUSD": 0
+      },
+      {
+        "name": "Costo Estándar (Zona Norte/Centro)",
+        "costs": {
+          "housing": 401,
+          "food": 800,
+          "transport": 820,
+          "health": 0,
+          "leisure": 6954,
+          "tuition": 0
+        },
+        "totalMonth": 8975,
+        "totalMonthUSD": 1795
+      },
+      {
+        "name": "Costo Premium (Zona Sur)",
+        "costs": {
+          "housing": 2,
+          "food": 1,
+          "transport": 820,
+          "health": 0,
+          "leisure": 1278,
+          "tuition": 0
+        },
+        "totalMonth": 2102,
+        "totalMonthUSD": 420
+      }
+    ]
+  }
+]

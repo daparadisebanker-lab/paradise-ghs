@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Paradise Ascend — Global Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="hdr">
+        <div class="hdr-brand">
+            <span class="hdr-name">Global Calculator</span>
+            <span class="hdr-sep"></span>
+            <span class="hdr-name" style="font-weight:300;color:rgba(255,255,255,.65)">by Ascend</span>
+        </div>
+        <div class="hdr-sub">Cost Comparison Calculator · Study Abroad</div>
+        <p class="hdr-desc">Tap a city module to select it into your comparison. Select regions to explore.</p>
+
+        <div class="filter-bar" style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <label class="filter-pill"><input type="checkbox" value="housing" checked class="filter-cb"> Housing</label>
+            <label class="filter-pill"><input type="checkbox" value="food" checked class="filter-cb"> Food</label>
+            <label class="filter-pill"><input type="checkbox" value="transport" checked class="filter-cb"> Transport</label>
+            <label class="filter-pill"><input type="checkbox" value="leisure" checked class="filter-cb"> Leisure</label>
+            <label class="filter-pill"><input type="checkbox" value="health" checked class="filter-cb"> Health</label>
+            <label class="filter-pill"><input type="checkbox" value="tuition" class="filter-cb"> Tuition</label>
+        </div>
+    </div>
+
+    <!-- TABS NAV -->
+    <div class="tabs">
+        <div class="tab ame on" data-target="pane-ame" onclick="switchTheme('ame', '#1B5FA8', this)">Americas</div>
+        <div class="tab eur" data-target="pane-eur" onclick="switchTheme('eur', '#0F7A55', this)">Europe</div>
+        <div class="tab asi" data-target="pane-asi" onclick="switchTheme('asi', '#8C4A0A', this)">Asia Pacific</div>
+        <div class="tab mea" data-target="pane-mea" onclick="switchTheme('mea', '#C8993A', this)">Mid East & Africa</div>
+        <div class="tab cmp" data-target="pane-cmp" onclick="switchTheme('cmp', '#1A1916', this)" style="margin-left:auto;">Compare <span class="cmp-badge" id="cmp-count">0</span></div>
+    </div>
+
+    <div class="body">
+        
+        <!-- REGION PANES -->
+        <div class="pane active" id="pane-ame">
+            <div class="prog-title" style="color:#1B5FA8">The Americas</div>
+            <div class="slabel">Select cities to include in cost projection</div>
+            <div class="mods" id="mods-ame"></div>
+            <div class="total-box">
+                <div class="total-lbl">Avg Monthly Output (Selected)</div>
+                <div class="total-n" id="total-ame" style="color:#1B5FA8">—</div>
+                <div class="total-subs"><span class="total-sub">Based on individual configurations</span></div>
+            </div>
+        </div>
+
+        <div class="pane" id="pane-eur">
+            <div class="prog-title" style="color:#0F7A55">Europe & UK</div>
+            <div class="slabel">Select cities to include in cost projection</div>
+            <div class="mods" id="mods-eur"></div>
+            <div class="total-box">
+                <div class="total-lbl">Avg Monthly Output (Selected)</div>
+                <div class="total-n" id="total-eur" style="color:#0F7A55">—</div>
+            </div>
+        </div>
+
+        <div class="pane" id="pane-asi">
+            <div class="prog-title" style="color:#8C4A0A">Asia Pacific</div>
+            <div class="slabel">Select cities to include in cost projection</div>
+            <div class="mods" id="mods-asi"></div>
+            <div class="total-box">
+                <div class="total-lbl">Avg Monthly Output (Selected)</div>
+                <div class="total-n" id="total-asi" style="color:#8C4A0A">—</div>
+            </div>
+        </div>
+
+        <div class="pane" id="pane-mea">
+            <div class="prog-title" style="color:#C8993A">Middle East & Africa</div>
+            <div class="slabel">Select cities to include in cost projection</div>
+            <div class="mods" id="mods-mea"></div>
+            <div class="total-box">
+                <div class="total-lbl">Avg Monthly Output (Selected)</div>
+                <div class="total-n" id="total-mea" style="color:#C8993A">—</div>
+            </div>
+        </div>
+
+        <!-- COMPARE DASHBOARD -->
+        <div class="pane" id="pane-cmp">
+            <div class="prog-title" style="color:#1A1916">Cost Strategy Radar</div>
+            <div class="slabel">Aggregated Insights</div>
+            
+            <div class="kpi3" style="margin-top: 1rem;">
+                <div class="kpi"><div class="kpi-n" id="kpi-avg">—</div><div class="kpi-l">Avg Monthly</div></div>
+                <div class="kpi"><div class="kpi-n" id="kpi-high" style="color:#FF453A">—</div><div class="kpi-l">Max Monthly</div></div>
+                <div class="kpi"><div class="kpi-n" id="kpi-low" style="color:#0F7A55">—</div><div class="kpi-l">Min Monthly</div></div>
+            </div>
+
+            <div class="bar-section" id="compare-bars">
+                <!-- Bars injected here -->
+                <div style="text-align:center; padding: 2rem; color: #A09C96; font-size:13px; font-style:italic;">No cities selected</div>
+            </div>
+
+            <div class="insight" id="compare-insight">
+                <strong>Nota Proyectiva:</strong> Estos datos representan una proyección de los costos estimados para el año 2027, ajustados con base en la inflación histórica. Todos los montos están normalizados en USD.
+            </div>
+
+            <button class="share-btn" onclick="shareWhatsApp()">Share Results via WhatsApp</button>
+        </div>
+
+    </div>
+
+    <div class="footer"><p><strong>Ascend by Paradise International College</strong> · Proprietary Comparison Calculator<br>Data Model: 2027 Projections</p></div>
+
+    <script src="data/app_data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

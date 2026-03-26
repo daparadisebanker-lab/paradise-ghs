@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Paradise Academy — Revenue Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}
+body{font-family:'DM Sans',sans-serif;background:#F7F5F0;color:#1A1916;min-height:100vh}
+.hdr{background:#1A1916;padding:1.5rem 1.25rem 1.25rem;border-bottom:3px solid #C8993A}
+.hdr-brand{display:flex;align-items:center;gap:.4rem;margin-bottom:.2rem}
+.hdr-name{font-family:'DM Serif Display',serif;font-size:clamp(24px,6vw,34px);color:#fff;font-weight:400;line-height:1.1}
+.hdr-sep{width:6px;height:6px;border-radius:50%;background:#C8993A;flex-shrink:0}
+.hdr-sub{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.4rem}
+.hdr-desc{font-size:12px;color:rgba(255,255,255,.38);line-height:1.6}
+.tabs{display:flex;background:#fff;border-bottom:1px solid #E2DDD5;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:50;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:.75rem 1rem;font-size:13px;font-weight:500;color:#6B6760;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;flex-shrink:0;user-select:none;transition:color .15s,border-color .15s;min-height:44px;display:flex;align-items:center}
+.tab.e.on{color:#1B5FA8;border-color:#1B5FA8}
+.tab.a.on{color:#0F7A55;border-color:#0F7A55}
+.tab.u.on{color:#8C4A0A;border-color:#8C4A0A}
+.tab.c.on{color:#C8993A;border-color:#C8993A}
+.body{padding:1.25rem 1rem .75rem}
+.pane{display:none}.pane.active{display:block}
+.prog-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:.5rem}
+.prog-title{font-size:15px;font-weight:500}
+.prog-on{display:flex;align-items:center;gap:.5rem;font-size:12px;color:#6B6760;flex-shrink:0}
+.tog{position:relative;width:40px;height:24px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0;position:absolute}
+.tog-track{position:absolute;inset:0;border-radius:12px;cursor:pointer;transition:background .2s}
+.tog-knob{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.tog input:checked~.tog-knob{transform:translateX(16px)}
+.slabel{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:#A09C96;margin-bottom:.6rem}
+.mods{display:flex;flex-direction:column;gap:6px;margin-bottom:.9rem}
+.mod{border:1px solid #E2DDD5;border-radius:10px;overflow:hidden;transition:border-color .15s}
+.mod.sel{border-color:#CBC6BC}
+.mod-head{display:flex;align-items:center;gap:.6rem;padding:.75rem .9rem;cursor:pointer;background:#fff;min-height:52px}
+.mod-head:active{background:#F7F5F0}
+.chk{width:20px;height:20px;border-radius:5px;border:1.5px solid #CBC6BC;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .12s}
+.chk.on{border-color:currentColor;background:currentColor}
+.chk.on::after{content:'';display:block;width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.mod-lbl{font-size:13px;color:#1A1916;flex:1;line-height:1.35}
+.mod-price{font-size:11px;color:#6B6760;white-space:nowrap;margin-left:.25rem}
+.mod-body{display:none;padding:.85rem .9rem 1rem;border-top:1px solid #E2DDD5;background:#F7F5F0}
+.mod.sel .mod-body{display:block}
+.mod-sl-row{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.85rem}
+.mod-sl-row:last-of-type{margin-bottom:0}
+.mod-sl-top{display:flex;justify-content:space-between;align-items:center}
+.mod-sl-lbl{font-size:12px;color:#6B6760}
+.mod-sl-val{font-size:13px;font-weight:600;color:#1A1916}
+.mod-sl-row input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;outline:none;cursor:pointer;background:#E2DDD5;margin:0}
+.mod-sl-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;cursor:pointer;border:none;background:currentColor;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.mod-sl-row input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;cursor:pointer;border:none;background:currentColor}
+.mod-result{display:flex;justify-content:space-between;align-items:center;margin-top:.85rem;padding-top:.85rem;border-top:1px solid #E2DDD5}
+.mod-result-lbl{font-size:11px;color:#A09C96;text-transform:uppercase;letter-spacing:.08em}
+.mod-result-val{font-size:20px;font-weight:500}
+.cost-row{margin-bottom:.9rem;padding:.85rem 1rem;background:#fff;border:1px solid #E2DDD5;border-radius:10px}
+.cost-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.cost-lbl{font-size:12px;color:#6B6760;flex:1;padding-right:.5rem;line-height:1.4}
+.cost-val{font-size:13px;font-weight:600;color:#1A1916;flex-shrink:0}
+.cost-row input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;outline:none;cursor:pointer;background:#E2DDD5;display:block}
+.cost-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;cursor:pointer;border:none;background:#6B6760;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.cost-row input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;cursor:pointer;border:none;background:#6B6760}
+.total-box{border:1px solid #E2DDD5;border-radius:12px;padding:1rem 1.1rem;background:#fff}
+.total-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#A09C96;margin-bottom:4px}
+.total-n{font-family:'DM Serif Display',serif;font-size:clamp(30px,8vw,40px);line-height:1;margin-bottom:.35rem}
+.total-subs{display:flex;gap:.75rem;flex-wrap:wrap}
+.total-sub{font-size:12px;color:#6B6760}
+.disabled{opacity:.3;pointer-events:none}
+.kpi3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
+@media(max-width:380px){.kpi3{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#fff;border:1px solid #E2DDD5;border-radius:10px;padding:.75rem .85rem}
+.kpi-n{font-family:'DM Serif Display',serif;font-size:clamp(20px,5vw,26px);margin-bottom:2px;line-height:1.1}
+.kpi-l{font-size:11px;color:#6B6760}
+.prog-row{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;border:1px solid #E2DDD5;border-radius:10px;margin-bottom:6px;background:#fff;transition:opacity .2s}
+.prog-row-name{font-size:13px;font-weight:500}
+.prog-row-val{font-size:14px;font-weight:500}
+.bar-section{margin:1rem 0}
+.bar-row{margin-bottom:.75rem}
+.bar-lrow{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;color:#6B6760}
+.bar-lrow span:last-child{font-weight:600;color:#1A1916}
+.bar-track{height:8px;border-radius:4px;background:#E2DDD5}
+.bar-fill{height:8px;border-radius:4px;transition:width .4s ease}
+.insight{background:#F0EDE6;border-left:3px solid #CBC6BC;border-radius:0 10px 10px 0;padding:.9rem 1rem;font-size:13px;color:#6B6760;line-height:1.65;margin-top:1rem}
+.insight strong{color:#1A1916;font-weight:600}
+.footer{background:#1A1916;padding:1.25rem;text-align:center;margin-top:2.5rem}
+.footer p{font-size:11px;color:rgba(255,255,255,.3);line-height:1.6}
+.footer strong{color:rgba(255,255,255,.55);font-weight:500}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-brand">
+    <span class="hdr-name">Paradise</span>
+    <span class="hdr-sep"></span>
+    <span class="hdr-name" style="font-weight:300;color:rgba(255,255,255,.65)">Academy</span>
+  </div>
+  <div class="hdr-sub">Side Programs · Revenue Calculator</div>
+  <p class="hdr-desc">Tap a modality to select it — each one gets its own sliders and feeds the total live.</p>
+</div>
+<div class="tabs">
+  <div class="tab e on" onclick="switchTab('eng',this)">English</div>
+  <div class="tab a" onclick="switchTab('art',this)">Art Academy</div>
+  <div class="tab u" onclick="switchTab('uni',this)">Uni Prep</div>
+  <div class="tab c" onclick="switchTab('comb',this)">Combined</div>
+</div>
+<div class="body">
+
+<div class="pane active" id="pane-eng">
+  <div class="prog-header">
+    <div class="prog-title">English Program</div>
+    <div class="prog-on">Active<label class="tog"><input type="checkbox" id="on-eng" checked onchange="recalcAll()"><div class="tog-track" style="background:#1B5FA8"></div><div class="tog-knob"></div></label></div>
+  </div>
+  <div id="eng-wrap">
+    <div class="slabel">Select modalities to offer</div>
+    <div class="mods" id="eng-mods"></div>
+    <div class="cost-row">
+      <div class="cost-top"><span class="cost-lbl">Teacher cost (% of gross)</span><span class="cost-val" id="eng-cost-v">35%</span></div>
+      <input type="range" id="eng-cost" min="20" max="55" value="35" oninput="recalcProg('eng')">
+    </div>
+    <div class="total-box">
+      <div class="total-lbl">Monthly net revenue</div>
+      <div class="total-n" id="eng-total" style="color:#1B5FA8">—</div>
+      <div class="total-subs"><span class="total-sub" id="eng-yr"></span><span class="total-sub" id="eng-mg"></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="pane" id="pane-art">
+  <div class="prog-header">
+    <div class="prog-title">Art Academy</div>
+    <div class="prog-on">Active<label class="tog"><input type="checkbox" id="on-art" checked onchange="recalcAll()"><div class="tog-track" style="background:#0F7A55"></div><div class="tog-knob"></div></label></div>
+  </div>
+  <div id="art-wrap">
+    <div class="slabel">Select modalities to offer</div>
+    <div class="mods" id="art-mods"></div>
+    <div class="cost-row">
+      <div class="cost-top"><span class="cost-lbl">Teacher + materials cost (% of gross)</span><span class="cost-val" id="art-cost-v">38%</span></div>
+      <input type="range" id="art-cost" min="25" max="55" value="38" oninput="recalcProg('art')">
+    </div>
+    <div class="total-box">
+      <div class="total-lbl">Monthly net revenue</div>
+      <div class="total-n" id="art-total" style="color:#0F7A55">—</div>
+      <div class="total-subs"><span class="total-sub" id="art-yr"></span><span class="total-sub" id="art-mg"></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="pane" id="pane-uni">
+  <div class="prog-header">
+    <div class="prog-title">University Prep</div>
+    <div class="prog-on">Active<label class="tog"><input type="checkbox" id="on-uni" checked onchange="recalcAll()"><div class="tog-track" style="background:#8C4A0A"></div><div class="tog-knob"></div></label></div>
+  </div>
+  <div id="uni-wrap">
+    <div class="slabel">Select cycle types to offer</div>
+    <div class="mods" id="uni-mods"></div>
+    <div class="cost-row">
+      <div class="cost-top"><span class="cost-lbl">Teacher cost (% of gross)</span><span class="cost-val" id="uni-cost-v">35%</span></div>
+      <input type="range" id="uni-cost" min="20" max="55" value="35" oninput="recalcProg('uni')">
+    </div>
+    <div class="total-box">
+      <div class="total-lbl">Annual net revenue</div>
+      <div class="total-n" id="uni-total" style="color:#8C4A0A">—</div>
+      <div class="total-subs"><span class="total-sub" id="uni-pc"></span><span class="total-sub" id="uni-mg"></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="pane" id="pane-comb">
+  <div class="kpi3">
+    <div class="kpi"><div class="kpi-n" id="c-mo" style="color:#C8993A">—</div><div class="kpi-l">Monthly net</div></div>
+    <div class="kpi"><div class="kpi-n" id="c-yr" style="color:#C8993A">—</div><div class="kpi-l">Annual net</div></div>
+    <div class="kpi"><div class="kpi-n" id="c-mg">—</div><div class="kpi-l">Margin</div></div>
+  </div>
+  <div class="prog-row" id="crow-eng"><span class="prog-row-name" style="color:#1B5FA8">English</span><span class="prog-row-val" id="crow-eng-v">—</span></div>
+  <div class="prog-row" id="crow-art"><span class="prog-row-name" style="color:#0F7A55">Art Academy</span><span class="prog-row-val" id="crow-art-v">—</span></div>
+  <div class="prog-row" id="crow-uni"><span class="prog-row-name" style="color:#8C4A0A">University Prep</span><span class="prog-row-val" id="crow-uni-v">—</span></div>
+  <div class="bar-section">
+    <div class="slabel">Revenue contribution</div>
+    <div class="bar-row"><div class="bar-lrow"><span>English</span><span id="bp-eng">—</span></div><div class="bar-track"><div class="bar-fill" id="bf-eng" style="background:#1B5FA8;width:0%"></div></div></div>
+    <div class="bar-row"><div class="bar-lrow"><span>Art Academy</span><span id="bp-art">—</span></div><div class="bar-track"><div class="bar-fill" id="bf-art" style="background:#0F7A55;width:0%"></div></div></div>
+    <div class="bar-row"><div class="bar-lrow"><span>University Prep</span><span id="bp-uni">—</span></div><div class="bar-track"><div class="bar-fill" id="bf-uni" style="background:#8C4A0A;width:0%"></div></div></div>
+  </div>
+  <div class="insight"><strong>Upsell flywheel:</strong> One school family enrolls in English now, Art on weekends, Uni Prep at 16. A single family can generate S/400–700/month across all three programs at near-zero acquisition cost.</div>
+</div>
+
+</div>
+<div class="footer"><p><strong>Paradise Academy</strong> · Side Programs Revenue Calculator<br>For internal planning · Based on Lima market benchmarks</p></div>
+
+<script>
+var DEFS={
+  eng:{color:'#1B5FA8',defOn:[0,1],mods:[
+    {label:'Kids group (3x/week)',            minP:200,maxP:800,defP:200,minG:1,maxG:8,defG:2,minS:6, maxS:12,defS:8, unit:'mo',    isEvent:false},
+    {label:'Teens group (3x/week)',           minP:200,maxP:800,defP:220,minG:1,maxG:8,defG:2,minS:6, maxS:12,defS:9, unit:'mo',    isEvent:false},
+    {label:'Adults evening (2x/week)',        minP:200,maxP:800,defP:250,minG:1,maxG:6,defG:1,minS:6, maxS:12,defS:8, unit:'mo',    isEvent:false},
+    {label:'Intensive program (5x/week)',     minP:200,maxP:800,defP:380,minG:1,maxG:6,defG:1,minS:6, maxS:15,defS:10,unit:'mo',    isEvent:false},
+    {label:'Saturday-only program',           minP:200,maxP:800,defP:280,minG:1,maxG:6,defG:2,minS:6, maxS:15,defS:10,unit:'mo',    isEvent:false},
+    {label:'Business English',                minP:200,maxP:800,defP:400,minG:1,maxG:4,defG:1,minS:4, maxS:10,defS:6, unit:'mo',    isEvent:false},
+    {label:'Exam prep (TOEFL/IELTS)',         minP:200,maxP:800,defP:500,minG:1,maxG:4,defG:1,minS:6, maxS:15,defS:10,unit:'course',isEvent:false}
+  ]},
+  art:{color:'#0F7A55',defOn:[0,1],mods:[
+    {label:'Kids drawing & painting (1x/wk)',minP:200,maxP:800,defP:200,minG:1,maxG:6,defG:2,minS:5,maxS:10,defS:7,unit:'mo',   isEvent:false},
+    {label:'Kids intensive (2x/wk)',         minP:200,maxP:800,defP:240,minG:1,maxG:4,defG:1,minS:5,maxS:10,defS:7,unit:'mo',   isEvent:false},
+    {label:'Teens portfolio track',          minP:200,maxP:800,defP:280,minG:1,maxG:4,defG:1,minS:5,maxS:10,defS:7,unit:'mo',   isEvent:false},
+    {label:'Adult weekend class',            minP:200,maxP:800,defP:210,minG:1,maxG:4,defG:1,minS:4,maxS:10,defS:7,unit:'mo',   isEvent:false},
+    {label:'Birthday art parties',           minP:200,maxP:800,defP:380,minG:1,maxG:8,defG:2,minS:1,maxS:1, defS:1,unit:'event',isEvent:true}
+  ]},
+  uni:{color:'#8C4A0A',defOn:[0,2],mods:[
+    {label:'Regular cycle (3 months)', minP:200,maxP:800, defP:500,minG:1,maxG:4,defG:1,minS:10,maxS:30,defS:20,unit:'cycle',isEvent:false},
+    {label:'Regular cycle (6 months)', minP:200,maxP:800,defP:800,minG:1,maxG:3,defG:1,minS:10,maxS:30,defS:18,unit:'cycle',isEvent:false},
+    {label:'Intensive (4 weeks)',       minP:200,maxP:800, defP:420,minG:1,maxG:4,defG:1,minS:10,maxS:25,defS:18,unit:'cycle',isEvent:false},
+    {label:'Weekend-only track',        minP:200,maxP:800, defP:340,minG:1,maxG:4,defG:1,minS:8, maxS:20,defS:15,unit:'cycle',isEvent:false},
+    {label:'Single subject modules',    minP:200,maxP:800, defP:200,minG:1,maxG:6,defG:2,minS:8, maxS:20,defS:15,unit:'cycle',isEvent:false}
+  ]}
+};
+var STATE={eng:{on:true,costPct:35,mods:[]},art:{on:true,costPct:38,mods:[]},uni:{on:true,costPct:35,mods:[]}};
+var NET={eng:0,art:0,uni:0},GROSS={eng:0,art:0,uni:0};
+function fmt(n){return 'S/'+Math.round(n).toLocaleString('es-PE');}
+function buildMods(prog){
+  var def=DEFS[prog],c=document.getElementById(prog+'-mods');c.innerHTML='';
+  def.mods.forEach(function(m,i){
+    var on=def.defOn.indexOf(i)>=0;
+    STATE[prog].mods.push({on:on,g:m.defG,s:m.defS,p:m.defP});
+    var d=document.createElement('div');d.className='mod'+(on?' sel':'');d.id=prog+'-mod-'+i;
+    var gl=m.isEvent?'Events per month':'Groups running';
+    var rl=prog==='uni'?'Revenue per cycle':'Monthly gross';
+    var sr=m.isEvent?'':'<div class="mod-sl-row"><div class="mod-sl-top"><span class="mod-sl-lbl">Students per group</span><span class="mod-sl-val" id="'+prog+'-sv-'+i+'">'+m.defS+'</span></div><input type="range" min="'+m.minS+'" max="'+m.maxS+'" value="'+m.defS+'" id="'+prog+'-s-'+i+'" oninput="updateMod(\''+prog+'\','+i+')" style="color:'+def.color+'"></div>';
+    d.innerHTML='<div class="mod-head" onclick="toggleMod(\''+prog+'\','+i+')"><div class="chk'+(on?' on':'')+'" id="'+prog+'-chk-'+i+'" style="color:'+def.color+'"></div><span class="mod-lbl">'+m.label+'</span><span class="mod-price">S/'+m.minP+'–'+m.maxP+'</span></div><div class="mod-body"><div class="mod-sl-row"><div class="mod-sl-top"><span class="mod-sl-lbl">'+gl+'</span><span class="mod-sl-val" id="'+prog+'-gv-'+i+'">'+m.defG+'</span></div><input type="range" min="'+m.minG+'" max="'+m.maxG+'" value="'+m.defG+'" id="'+prog+'-g-'+i+'" oninput="updateMod(\''+prog+'\','+i+')" style="color:'+def.color+'"></div>'+sr+'<div class="mod-sl-row"><div class="mod-sl-top"><span class="mod-sl-lbl">Price per student (S/)</span><span class="mod-sl-val" id="'+prog+'-pv-'+i+'">S/'+m.defP+'</span></div><input type="range" min="'+m.minP+'" max="'+m.maxP+'" value="'+m.defP+'" id="'+prog+'-p-'+i+'" oninput="updateMod(\''+prog+'\','+i+')" style="color:'+def.color+'"></div><div class="mod-result"><span class="mod-result-lbl">'+rl+'</span><span class="mod-result-val" id="'+prog+'-gross-'+i+'" style="color:'+def.color+'">'+fmt(m.defG*m.defS*m.defP)+'</span></div></div>';
+    c.appendChild(d);
+  });
+}
+function toggleMod(prog,i){
+  STATE[prog].mods[i].on=!STATE[prog].mods[i].on;
+  document.getElementById(prog+'-mod-'+i).classList.toggle('sel',STATE[prog].mods[i].on);
+  document.getElementById(prog+'-chk-'+i).classList.toggle('on',STATE[prog].mods[i].on);
+  recalcProg(prog);
+}
+function updateMod(prog,i){
+  var g=+document.getElementById(prog+'-g-'+i).value;
+  var sEl=document.getElementById(prog+'-s-'+i);
+  var s=sEl?+sEl.value:1;
+  var p=+document.getElementById(prog+'-p-'+i).value;
+  document.getElementById(prog+'-gv-'+i).textContent=g;
+  if(sEl)document.getElementById(prog+'-sv-'+i).textContent=s;
+  document.getElementById(prog+'-pv-'+i).textContent='S/'+p;
+  STATE[prog].mods[i].g=g;STATE[prog].mods[i].s=s;STATE[prog].mods[i].p=p;
+  document.getElementById(prog+'-gross-'+i).textContent=fmt(g*s*p);
+  recalcProg(prog);
+}
+function recalcProg(prog){
+  var cp=+document.getElementById(prog+'-cost').value;
+  STATE[prog].costPct=cp;
+  document.getElementById(prog+'-cost-v').textContent=cp+'%';
+  var gross=0;
+  STATE[prog].mods.forEach(function(m){if(m.on)gross+=m.g*m.s*m.p;});
+  GROSS[prog]=gross;
+  var net=gross*(1-cp/100);NET[prog]=net;
+  if(prog==='uni'){
+    var cy=STATE[prog].mods.reduce(function(s,m){return s+(m.on?m.g:0);},0)||1;
+    document.getElementById('uni-total').textContent=STATE[prog].on?fmt(net):'—';
+    document.getElementById('uni-pc').textContent=STATE[prog].on?fmt(net/cy)+' net avg/cycle':'';
+    document.getElementById('uni-mg').textContent=STATE[prog].on?(100-cp)+'% margin':'';
+  }else{
+    document.getElementById(prog+'-total').textContent=STATE[prog].on?fmt(net):'—';
+    document.getElementById(prog+'-yr').textContent=STATE[prog].on?fmt(net*12)+' / year':'';
+    document.getElementById(prog+'-mg').textContent=STATE[prog].on?(100-cp)+'% margin':'';
+  }
+  recalcAll();
+}
+function recalcAll(){
+  STATE.eng.on=document.getElementById('on-eng').checked;
+  STATE.art.on=document.getElementById('on-art').checked;
+  STATE.uni.on=document.getElementById('on-uni').checked;
+  ['eng','art','uni'].forEach(function(p){document.getElementById(p+'-wrap').classList.toggle('disabled',!STATE[p].on);});
+  var em=STATE.eng.on?NET.eng:0,am=STATE.art.on?NET.art:0,um=STATE.uni.on?NET.uni/12:0;
+  var tm=em+am+um,ta=tm*12;
+  var tg=(STATE.eng.on?GROSS.eng*12:0)+(STATE.art.on?GROSS.art*12:0)+(STATE.uni.on?GROSS.uni:0);
+  var bl=tg>0?Math.round(ta/tg*100):0;
+  document.getElementById('c-mo').textContent=fmt(tm);
+  document.getElementById('c-yr').textContent=fmt(ta);
+  document.getElementById('c-mg').textContent=bl+'%';
+  document.getElementById('crow-eng-v').textContent=STATE.eng.on?fmt(em)+'/mo':'Off';
+  document.getElementById('crow-art-v').textContent=STATE.art.on?fmt(am)+'/mo':'Off';
+  document.getElementById('crow-uni-v').textContent=STATE.uni.on?fmt(um)+'/mo avg':'Off';
+  document.getElementById('crow-eng').style.opacity=STATE.eng.on?'1':'0.35';
+  document.getElementById('crow-art').style.opacity=STATE.art.on?'1':'0.35';
+  document.getElementById('crow-uni').style.opacity=STATE.uni.on?'1':'0.35';
+  var mx=Math.max(em,am,um,1);
+  document.getElementById('bf-eng').style.width=Math.round(em/mx*100)+'%';
+  document.getElementById('bf-art').style.width=Math.round(am/mx*100)+'%';
+  document.getElementById('bf-uni').style.width=Math.round(um/mx*100)+'%';
+  document.getElementById('bp-eng').textContent=tm>0?Math.round(em/tm*100)+'%':'—';
+  document.getElementById('bp-art').textContent=tm>0?Math.round(am/tm*100)+'%':'—';
+  document.getElementById('bp-uni').textContent=tm>0?Math.round(um/tm*100)+'%':'—';
+}
+function switchTab(id,el){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  document.querySelectorAll('.pane').forEach(function(p){p.classList.remove('active');});
+  el.classList.add('on');document.getElementById('pane-'+id).classList.add('active');
+  if(id==='comb')recalcAll();
+}
+buildMods('eng');buildMods('art');buildMods('uni');
+recalcProg('eng');recalcProg('art');recalcProg('uni');
+</script>
+</body>
+</html>
