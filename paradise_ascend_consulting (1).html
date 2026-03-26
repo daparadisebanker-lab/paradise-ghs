@@ -332,10 +332,10 @@
         .form-group { display: flex; flex-direction: column; gap: 8px; }
         .form-group label { font-size: 0.85rem; color: var(--text-main); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
         .form-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: -4px; }
-        .form-control { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 14px 16px; border-radius: 12px; color: white; font-size: 1rem; font-family: inherit; transition: border-color 0.3s ease, box-shadow 0.3s ease; width: 100%; }
+        .form-control { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 14px 16px; border-radius: 12px; color: white; font-size: 1rem; font-family: inherit; transition: border-color 0.3s ease, box-shadow 0.3s ease; width: 100%; color-scheme: dark; }
         .form-control:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,0.08); box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2); }
         .form-control::placeholder { color: rgba(255,255,255,0.3); }
-        select.form-control { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2386868b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+        select.form-control { appearance: none; cursor: pointer; color-scheme: dark; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2386868b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
         textarea.form-control { resize: vertical; min-height: 100px; }
 
         .form-actions { display: flex; justify-content: flex-end; gap: 16px; margin-top: 20px; padding-top: 24px; border-top: 1px solid var(--glass-border); }
@@ -582,7 +582,7 @@
         }
         .floating-arrows {
             position: fixed;
-            bottom: 32px;
+            bottom: 110px;
             right: 32px;
             display: flex;
             gap: 12px;
@@ -617,6 +617,7 @@
         }
 
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <div class="ambient-glow"></div>
@@ -1092,16 +1093,93 @@
             }
         }
 
-        function submitForm() {
-            document.getElementById(`step${currentStep}`).classList.remove('active');
+        
+        async function submitForm() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const form = document.getElementById('ascendForm');
+            const inputs = form.querySelectorAll('input, select, textarea');
+            
+            let y = 20;
+            doc.setFontSize(22);
+            doc.setTextColor(10, 132, 255);
+            doc.text("Ascend by Paradise", 20, y);
+            y += 10;
+            doc.setFontSize(14);
+            doc.setTextColor(100);
+            doc.text("Consultation Intake Summary", 20, y);
+            y += 20;
+            
+            doc.setFontSize(12);
+            doc.setTextColor(0);
+            
+            let parentName = "";
+            let dataSummary = "";
+
+            inputs.forEach(input => {
+                let label = "";
+                const group = input.closest('.form-group');
+                if (group) {
+                    const l = group.querySelector('label');
+                    if (l) label = l.innerText;
+                }
+
+                let value = "";
+                if (input.type === 'checkbox') {
+                    if (input.checked) {
+                        const card = input.closest('.checkbox-card');
+                        if (card) value = card.innerText.trim();
+                    } else return; // Skip unchecked
+                } else {
+                    value = input.value;
+                }
+
+                if (!label) label = "Field";
+                
+                if (label.includes("Name") && !parentName) parentName = value;
+
+                doc.setFont("helvetica", "bold");
+                doc.text(label + ":", 20, y);
+                doc.setFont("helvetica", "normal");
+                const splitText = doc.splitTextToSize(value || "Not provided", 130);
+                doc.text(splitText, 70, y);
+                y += (splitText.length * 7) + 2;
+
+                if (label && value && !input.hidden && input.type !== 'checkbox') {
+                    dataSummary += "*" + label + ":* " + value + "\n";
+                }
+
+                if (y > 270) {
+                    doc.addPage();
+                    y = 20;
+                }
+            });
+
+            // Save PDF
+            const filename = "Paradise_Consultation_" + (parentName.replace(/\s/g, '_') || 'Request') + ".pdf";
+            doc.save(filename);
+
+            // WhatsApp Redirect
+            const intro = "Hola, soy " + (parentName || 'Interesado') + ". Estoy interesado en la consultoría de Ascend por Paradise. He generado un resumen en PDF con mis datos.\n\n";
+            const waUrl = "https://wa.me/51952381451?text=" + encodeURIComponent(intro + dataSummary);
+            
+            // Show Success State
+            document.getElementById("step" + currentStep).classList.remove('active');
             document.getElementById('stepSuccess').classList.add('active');
             document.getElementById('progressFill').style.width = '100%';
             for(let i=1; i<=3; i++) {
-                const indicator = document.getElementById(`stepIndicator${i}`);
-                indicator.className = 'progress-step completed';
-                indicator.innerHTML = '✓';
+                const indicator = document.getElementById("stepIndicator" + i);
+                if (indicator) {
+                    indicator.className = 'progress-step completed';
+                    indicator.innerHTML = '✓';
+                }
             }
+            
+            setTimeout(() => {
+                window.open(waUrl, '_blank');
+            }, 1500);
         }
+
 
         function toggleCheck(inputElem) {
             const card = inputElem.closest('.checkbox-card');
