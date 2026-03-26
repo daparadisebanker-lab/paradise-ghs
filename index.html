@@ -695,6 +695,75 @@
             .ambient-glow { width: 120vw; height: 60vh; top: -10vh; left: -20vw; filter: blur(80px); }
         }
 
+    
+        /* ── GLOBAL FOOTER & ARROWS ── */
+        .global-footer {
+            padding: 64px 24px;
+            background: #000;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            margin-top: 64px;
+            position: relative;
+            z-index: 10;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        .footer-links a {
+            color: #86868b;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .footer-links a:hover {
+            color: #fff;
+        }
+        .footer-copy {
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+            font-family: 'Inter', sans-serif;
+        }
+        .floating-arrows {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            display: flex;
+            gap: 12px;
+            z-index: 9999;
+        }
+        .arrow-btn {
+            background: rgba(20,20,20,0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .arrow-btn svg {
+            width: 20px; height: 20px;
+            fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .arrow-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .floating-arrows {
+                bottom: 24px;
+                right: 24px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -702,19 +771,7 @@
 <div class="ambient-glow"></div>
 <div class="ambient-glow-2"></div>
 
-<!-- ═══════════════════════════════════════════
-     GLOBAL NAVBAR (COMPILATION)
-     ═══════════════════════════════════════════ -->
-<nav class="global-nav">
-    <div class="nav-brand">
-        <div class="nav-brand-logo">P</div>
-        Paradise
-    </div>
-    </div>
-    <div class="nav-right">
-        <a href="#agenda" class="btn-nav">Apply Now</a>
-    </div>
-</nav>
+
 
 <!-- ═══════════════════════════════════════════
      FLOATING SIDE MENU
@@ -1046,6 +1103,30 @@
         // Disable scroll to top to keep focus on success
     }
 </script>
+
+
+<!-- ═══════════════════════════════════════════
+     GLOBAL FOOTER & NAVIGATION ARROWS
+     ═══════════════════════════════════════════ -->
+<footer class="global-footer">
+    <div class="footer-links">
+        <a href="index.html">Paradise Landing</a>
+        <a href="paradise_ascend_consulting (1).html">Ascend Portal</a>
+        <a href="paradise_features_comparison.html">Course Benchmark</a>
+        <a href="paradise_2026_academic_calendar.html">Academic Calendar</a>
+        <a href="global-calculator/index.html">Global Calculator</a>
+    </div>
+    <div class="footer-copy">© 2026 Paradise Global High School. All rights reserved.</div>
+</footer>
+
+<div class="floating-arrows">
+    <button onclick="history.back()" class="arrow-btn" aria-label="Go Back">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button onclick="history.forward()" class="arrow-btn" aria-label="Go Forward">
+        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+</div>
 
 </body>
 </html>
