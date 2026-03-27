@@ -1352,22 +1352,18 @@
             doc.setFillColor(10, 132, 255);
             doc.rect(0, 292, PAGE_W, 5, 'F');
 
-            // ── Save PDF ─────────────────────────────────────
+            // ── Build message text ────────────────────────────
             const safeName = (parentName || 'Solicitud').replace(/\s+/g, '_');
-            const filename = `Paradise_Ascend_${safeName}.pdf`;
-            doc.save(filename);
+            const pdfFilename = `Paradise_Ascend_${safeName}.pdf`;
 
-            // ── WhatsApp redirect ─────────────────────────────
             const intro =
                 `Hola, mi nombre es *${parentName || 'un interesado'}*.\n` +
                 `Estoy interesado/a en la consultoría *Ascend by Paradise* y me gustaría agendar una sesión.\n\n` +
-                `Adjunto mi resumen de datos:\n\n` +
+                `📋 *Resumen de mi perfil:*\n\n` +
                 dataSummary +
                 `\nEspero su respuesta. ¡Gracias!`;
 
-            const waUrl = `https://wa.me/51952381451?text=${encodeURIComponent(intro)}`;
-
-            // Show success state
+            // ── Show success state first ──────────────────────
             document.getElementById('step' + currentStep).classList.remove('active');
             document.getElementById('stepSuccess').classList.add('active');
             document.getElementById('progressFill').style.width = '100%';
@@ -1376,9 +1372,35 @@
                 if (ind) { ind.className = 'progress-step completed'; ind.innerHTML = '✓'; }
             }
 
-            // Open WhatsApp after short delay (PDF download must trigger first)
-            setTimeout(() => { window.open(waUrl, '_blank'); }, 1800);
+            // ── Share PDF via Web Share API (mobile) or fallback ──
+            // Get PDF as blob for sharing
+            const pdfBlob = doc.output('blob');
+            const pdfFile = new File([pdfBlob], pdfFilename, { type: 'application/pdf' });
+
+            const waFallbackUrl = `https://wa.me/51952381451?text=${encodeURIComponent(intro)}`;
+
+            setTimeout(async () => {
+                // Try native share with file attachment (works on mobile Chrome/Safari)
+                if (navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
+                    try {
+                        await navigator.share({
+                            title: 'Consulta Ascend by Paradise',
+                            text: intro,
+                            files: [pdfFile]
+                        });
+                        // If share succeeded, no need to save or open WA fallback
+                        return;
+                    } catch (err) {
+                        // User cancelled share or error — fall through to fallback
+                        if (err.name === 'AbortError') return; // user cancelled intentionally
+                    }
+                }
+                // Fallback: save PDF to device + open WhatsApp with text pre-filled
+                doc.save(filename2);
+                setTimeout(() => { window.open(waFallbackUrl, '_blank'); }, 600);
+            }, 800);
         }
+
 
 
 
