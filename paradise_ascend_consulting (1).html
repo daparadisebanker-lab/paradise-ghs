@@ -1231,89 +1231,155 @@
         
         async function submitForm() {
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+            const doc = new jsPDF({ unit: 'mm', format: 'a4' });
             const form = document.getElementById('ascendForm');
-            const inputs = form.querySelectorAll('input, select, textarea');
-            
-            let y = 20;
+            const PAGE_W = 210;
+            const MARGIN = 20;
+            const VALUE_INDENT = 28;
+            const MAX_W = PAGE_W - MARGIN * 2 - VALUE_INDENT;
+            const LINE_H = 6;
+
+            let y = 22;
+            let parentName = '';
+            let dataSummary = '';
+
+            // ── Header ──────────────────────────────────────
+            // Blue accent bar
+            doc.setFillColor(10, 132, 255);
+            doc.rect(0, 0, PAGE_W, 8, 'F');
+
             doc.setFontSize(22);
+            doc.setFont('helvetica', 'bold');
             doc.setTextColor(10, 132, 255);
-            doc.text("Ascend by Paradise", 20, y);
-            y += 10;
-            doc.setFontSize(14);
-            doc.setTextColor(100);
-            doc.text("Consultation Intake Summary", 20, y);
-            y += 20;
-            
-            doc.setFontSize(12);
-            doc.setTextColor(0);
-            
-            let parentName = "";
-            let dataSummary = "";
+            doc.text('Ascend by Paradise', MARGIN, y + 10);
+            y += 14;
 
-            inputs.forEach(input => {
-                let label = "";
-                const group = input.closest('.form-group');
-                if (group) {
-                    const l = group.querySelector('label');
-                    if (l) label = l.innerText;
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(120);
+            doc.text('Consultation Intake Summary — Confidential', MARGIN, y + 10);
+            y += 16;
+
+            // Divider
+            doc.setDrawColor(220);
+            doc.line(MARGIN, y + 6, PAGE_W - MARGIN, y + 6);
+            y += 14;
+
+            // ── Collect field data ───────────────────────────
+            const fields = [];
+
+            // Collect text/select/textarea inputs
+            form.querySelectorAll('.form-group').forEach(group => {
+                const labelEl = group.querySelector('label');
+                if (!labelEl) return;
+                const labelText = labelEl.innerText.trim().replace(/\s*\*$/, '');
+
+                // Text / email / tel / textarea / select
+                const inputEl = group.querySelector('input:not([type=checkbox]):not([type=radio]), select, textarea');
+                if (inputEl && inputEl.value.trim()) {
+                    fields.push({ label: labelText, value: inputEl.value.trim() });
+                    if ((labelText.toLowerCase().includes('nombre completo') || labelText.toLowerCase().includes('full name')) && !parentName) {
+                        parentName = inputEl.value.trim();
+                    }
                 }
 
-                let value = "";
-                if (input.type === 'checkbox') {
-                    if (input.checked) {
-                        const card = input.closest('.checkbox-card');
-                        if (card) value = card.innerText.trim();
-                    } else return; // Skip unchecked
-                } else {
-                    value = input.value;
+                // Checkboxes (multi-select cards)
+                const checked = group.querySelectorAll('input[type=checkbox]:checked');
+                if (checked.length) {
+                    const vals = Array.from(checked).map(cb => {
+                        const card = cb.closest('.checkbox-card');
+                        return card ? card.innerText.replace(/\n/g,' ').trim() : cb.value;
+                    });
+                    fields.push({ label: labelText, value: vals.join(', ') });
                 }
 
-                if (!label) label = "Field";
-                
-                if (label.includes("Name") && !parentName) parentName = value;
-
-                doc.setFont("helvetica", "bold");
-                doc.text(label + ":", 20, y);
-                doc.setFont("helvetica", "normal");
-                const splitText = doc.splitTextToSize(value || "Not provided", 130);
-                doc.text(splitText, 70, y);
-                y += (splitText.length * 7) + 2;
-
-                if (label && value && !input.hidden && input.type !== 'checkbox') {
-                    dataSummary += "*" + label + ":* " + value + "\n";
-                }
-
-                if (y > 270) {
-                    doc.addPage();
-                    y = 20;
+                // Click-selected cards (radio-style divs with class 'selected')
+                const selectedCards = group.querySelectorAll('.radio-card.selected, .checkbox-card.selected');
+                if (selectedCards.length && !inputEl && !checked.length) {
+                    const vals = Array.from(selectedCards).map(c => c.innerText.replace(/\n/g,' ').trim());
+                    fields.push({ label: labelText, value: vals.join(', ') });
                 }
             });
 
-            // Save PDF
-            const filename = "Paradise_Consultation_" + (parentName.replace(/\s/g, '_') || 'Request') + ".pdf";
+            // ── Render each field ────────────────────────────
+            doc.setFontSize(10);
+            fields.forEach((field, idx) => {
+                // Section background alternate tint
+                if (idx % 2 === 0) {
+                    doc.setFillColor(248, 249, 251);
+                    doc.rect(MARGIN - 4, y - 4, PAGE_W - MARGIN * 2 + 8, 0, 'F'); // just style marker
+                }
+
+                // Label
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(40);
+                doc.setFontSize(9);
+                const labelLines = doc.splitTextToSize(field.label.toUpperCase(), PAGE_W - MARGIN * 2);
+                doc.text(labelLines, MARGIN, y);
+                y += labelLines.length * (LINE_H - 1);
+
+                // Value
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(70);
+                doc.setFontSize(10.5);
+                const valLines = doc.splitTextToSize(field.value || '—', PAGE_W - MARGIN * 2 - VALUE_INDENT);
+                doc.text(valLines, MARGIN + VALUE_INDENT, y);
+                y += valLines.length * LINE_H + 5;
+
+                // Light separator
+                doc.setDrawColor(235);
+                doc.line(MARGIN, y - 2, PAGE_W - MARGIN, y - 2);
+
+                // Page break
+                if (y > 260) {
+                    doc.addPage();
+                    y = 20;
+                    doc.setFillColor(10, 132, 255);
+                    doc.rect(0, 0, PAGE_W, 4, 'F');
+                }
+
+                // Build WhatsApp summary
+                dataSummary += `• *${field.label}:* ${field.value}\n`;
+                if (!parentName && field.label.toLowerCase().includes('nombre')) {
+                    parentName = field.value;
+                }
+            });
+
+            // ── Footer ───────────────────────────────────────
+            doc.setFontSize(8);
+            doc.setTextColor(160);
+            doc.text(`Generated by Ascend by Paradise · ${new Date().toLocaleDateString('es-PE')}`, MARGIN, 287);
+            doc.setFillColor(10, 132, 255);
+            doc.rect(0, 292, PAGE_W, 5, 'F');
+
+            // ── Save PDF ─────────────────────────────────────
+            const safeName = (parentName || 'Solicitud').replace(/\s+/g, '_');
+            const filename = `Paradise_Ascend_${safeName}.pdf`;
             doc.save(filename);
 
-            // WhatsApp Redirect
-            const intro = "Hola, soy " + (parentName || 'Interesado') + ". Estoy interesado en la consultoría de Ascend por Paradise. He generado un resumen en PDF con mis datos.\n\n";
-            const waUrl = "https://wa.me/51952381451?text=" + encodeURIComponent(intro + dataSummary);
-            
-            // Show Success State
-            document.getElementById("step" + currentStep).classList.remove('active');
+            // ── WhatsApp redirect ─────────────────────────────
+            const intro =
+                `Hola, mi nombre es *${parentName || 'un interesado'}*.\n` +
+                `Estoy interesado/a en la consultoría *Ascend by Paradise* y me gustaría agendar una sesión.\n\n` +
+                `Adjunto mi resumen de datos:\n\n` +
+                dataSummary +
+                `\nEspero su respuesta. ¡Gracias!`;
+
+            const waUrl = `https://wa.me/51952381451?text=${encodeURIComponent(intro)}`;
+
+            // Show success state
+            document.getElementById('step' + currentStep).classList.remove('active');
             document.getElementById('stepSuccess').classList.add('active');
             document.getElementById('progressFill').style.width = '100%';
-            for(let i=1; i<=3; i++) {
-                const indicator = document.getElementById("stepIndicator" + i);
-                if (indicator) {
-                    indicator.className = 'progress-step completed';
-                    indicator.innerHTML = '✓';
-                }
+            for (let i = 1; i <= 3; i++) {
+                const ind = document.getElementById('stepIndicator' + i);
+                if (ind) { ind.className = 'progress-step completed'; ind.innerHTML = '✓'; }
             }
-            
-            setTimeout(() => {
-                window.open(waUrl, '_blank');
-            }, 1500);
+
+            // Open WhatsApp after short delay (PDF download must trigger first)
+            setTimeout(() => { window.open(waUrl, '_blank'); }, 1800);
         }
+
 
 
         function toggleCheck(inputElem) {
