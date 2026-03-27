@@ -806,7 +806,7 @@
         <p class="hero-sub">
             No preparamos alumnos para aprobar un examen estadarizado. Formamos jóvenes que llegan a la universidad con solidez, confianza y una visión verdaderamente global.
         </p>
-        <a href="#agenda" class="hero-cta">Agenda tu Asesoría</a>
+        <a href="paradise_ascend_consulting (1).html#initiate" class="hero-cta">Agenda tu Asesoría</a>
     </div>
 </section>
 
@@ -979,142 +979,18 @@
 <!-- ═══════════════════════════════════════════
      SECTION 7 · CTA FINAL (ASCEND FORM)
      ═══════════════════════════════════════════ -->
-<section class="cta-section" id="agenda">
+<!-- ═══════════════════════════════════════════
+     SECTION 7 · CTA FINAL
+     ═══════════════════════════════════════════ -->
+<section class="cta-section" id="agenda" style="padding: 100px 24px;">
     <div class="container">
         <h2 class="section-title">Inicia tu proceso de <em>Ascenso</em></h2>
-        <p class="section-subtitle" style="margin: 0 auto; opacity: 0.8;">
-            Completa nuestro Cuestionario de Inteligencia Preliminar. Las familias aprobadas obtendrán una sesión de consultoría privada con nuestros directores globales.
+        <p class="section-subtitle" style="margin: 0 auto 40px auto; opacity: 0.8; max-width: 600px;">
+            Inicia tu diagnóstico personalizado para descubrir la ruta universitaria ideal para tu hijo.
         </p>
-
-        <!-- ASCEND PORTAL INTAKE FORM -->
-        <div class="form-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="formProgress"></div>
-            </div>
-
-            <!-- STEP 1: Parent Data -->
-            <div class="form-step active" id="step1">
-                <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; font-family: 'Playfair Display', serif;">Perfil del Representante</h3>
-                <div class="form-group">
-                    <label class="form-label">Nombre Completo (Padre/Apoderado)</label>
-                    <input type="text" class="form-control" placeholder="Ej. Javier Montenegro">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Correo Electrónico (Corporativo o Principal)</label>
-                    <input type="email" class="form-control" placeholder="ejemplo@empresa.com">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Teléfono / WhatsApp</label>
-                    <input type="tel" class="form-control" placeholder="+51 999 000 000">
-                </div>
-                <div class="form-actions" style="justify-content: flex-end;">
-                    <button class="btn-form btn-next" onclick="nextStep(2)">Continuar Académico →</button>
-                </div>
-            </div>
-
-            <!-- STEP 2: Student Data -->
-            <div class="form-step" id="step2">
-                <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; font-family: 'Playfair Display', serif;">Perfil del Alumno</h3>
-                <div class="form-group">
-                    <label class="form-label">Nombre del Postulante</label>
-                    <input type="text" class="form-control" placeholder="Nombre completo">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Current Grade / Año de Secundaria (2025)</label>
-                    <div class="radio-grid" id="gradeSelection">
-                        <div class="radio-card" onclick="selectRadio(this, 'grade')">1º Secundaria</div>
-                        <div class="radio-card" onclick="selectRadio(this, 'grade')">2º Secundaria</div>
-                        <div class="radio-card" onclick="selectRadio(this, 'grade')">3º Secundaria</div>
-                        <div class="radio-card" onclick="selectRadio(this, 'grade')">4º Secundaria</div>
-                        <div class="radio-card" onclick="selectRadio(this, 'grade')">5º Secundaria</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Colegio de Procedencia</label>
-                    <input type="text" class="form-control" placeholder="Nombre de la institución actual">
-                </div>
-                <div class="form-actions">
-                    <button class="btn-form btn-back" onclick="nextStep(1)">← Volver</button>
-                    <button class="btn-form btn-next" onclick="nextStep(3)">Último Paso →</button>
-                </div>
-            </div>
-
-            <!-- STEP 3: Goals -->
-            <div class="form-step" id="step3">
-                <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; font-family: 'Playfair Display', serif;">Horizonte Estratégico</h3>
-                <div class="form-group">
-                    <label class="form-label">¿Por qué considera Paradise High School para su hijo?</label>
-                    <textarea class="form-control" rows="3" placeholder="Queremos un nivel preuniversitario internacional..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Destino Universitario Esperado</label>
-                    <div class="radio-grid" style="grid-template-columns: 1fr;" id="destSelection">
-                        <div class="radio-card" onclick="selectRadio(this, 'dest')">Estados Unidos o Canadá (Ivy League / Top 50)</div>
-                        <div class="radio-card" onclick="selectRadio(this, 'dest')">Europa (UK, España, Suiza, Italia)</div>
-                        <div class="radio-card" onclick="selectRadio(this, 'dest')">Universidades Privadas Top (Perú/Latam)</div>
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button class="btn-form btn-back" onclick="nextStep(2)">← Volver</button>
-                    <button class="btn-form btn-next" onclick="submitAscendForm()" style="background: var(--accent); color: white;">Enviar Solicitud Segura</button>
-                </div>
-            </div>
-
-            <!-- COMPLETION STATE -->
-            <div class="form-step" id="step4" style="text-align: center; padding: 40px 0;">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="margin-bottom: 24px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                <h3 style="font-size: 24px; font-family: 'Playfair Display', serif; margin-bottom: 16px;">Solicitud Recibida</h3>
-                <p style="color: var(--text-secondary); max-width: 400px; margin: 0 auto;">
-                    Su perfil ha sido encriptado y enviado a la Junta de Admisión. Un director se comunicará en las próximas 48 horas con el veredicto.
-                </p>
-                <button class="btn-outline" style="margin-top: 32px;" onclick="location.reload()">Regresar al Inicio</button>
-            </div>
-
-        </div> <!-- End Form Container -->
+        <a href="paradise_ascend_consulting (1).html#initiate" class="btn-form btn-next" style="display: inline-block; text-decoration: none;">Agenda tu Asesoría →</a>
     </div>
 </section>
-
-<script>
-    // ── Mobile Dropdown Touch Fix ──
-    document.querySelectorAll('.floating-nav .dropdown').forEach(function(dropdown) {
-        dropdown.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const isOpen = this.classList.contains('open');
-            document.querySelectorAll('.floating-nav .dropdown').forEach(d => d.classList.remove('open'));
-            if (!isOpen) this.classList.add('open');
-        });
-    });
-    document.addEventListener('click', function() {
-        document.querySelectorAll('.floating-nav .dropdown').forEach(d => d.classList.remove('open'));
-    });
-
-    // Selection Logic for Form
-    function selectRadio(el, group) {
-        const parent = el.parentElement;
-        parent.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
-        el.classList.add('selected');
-    }
-
-    // Step Navigation Logic for Form
-    function nextStep(step) {
-        document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-        document.getElementById('step' + step).classList.add('active');
-        
-        // Progress Bar
-        const progress = document.getElementById('formProgress');
-        if (step === 1) progress.style.width = '33%';
-        if (step === 2) progress.style.width = '66%';
-        if (step === 3) progress.style.width = '100%';
-    }
-
-    function submitAscendForm() {
-        document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-        document.getElementById('step4').classList.add('active');
-        document.querySelector('.progress-bar').style.display = 'none';
-        
-        // Disable scroll to top to keep focus on success
-    }
-</script>
 
 
 <!-- ═══════════════════════════════════════════
