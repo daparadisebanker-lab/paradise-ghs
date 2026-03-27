@@ -77,6 +77,7 @@
             justify-content: space-between;
             padding: 0 40px;
             z-index: 1000;
+            gap: 12px;
         }
 
         .brand {
@@ -87,6 +88,8 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .brand-icon {
@@ -99,7 +102,13 @@
             border: 1px solid var(--glass-border);
             border-radius: 100px;
             padding: 4px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            flex-shrink: 1;
+            min-width: 0;
         }
+        .nav-router::-webkit-scrollbar { display: none; }
 
         .route-btn {
             background: transparent;
@@ -112,6 +121,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .route-btn:hover {
@@ -136,9 +147,12 @@
             justify-content: center;
             cursor: pointer;
             transition: border-color 0.3s ease;
+            flex-shrink: 0;
         }
 
         .user-avatar:hover { border-color: rgba(255,255,255,0.3); }
+
+        /* Mobile nav compact — handled by existing breakpoint below */
 
         /* Main Workspace */
         .workspace {
@@ -622,25 +636,20 @@
             color: rgba(255,255,255,0.3);
             font-family: 'Inter', sans-serif;
         }
-        .floating-arrows {
+        .arrow-btn {
             position: fixed;
             bottom: 110px;
-            right: 32px;
-            display: flex;
-            gap: 12px;
-            z-index: 9999;
-        }
-        .arrow-btn {
             background: rgba(20,20,20,0.8);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.1);
             color: white;
-            width: 44px; height: 44px;
+            width: 48px; height: 48px;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 9999;
         }
         .arrow-btn svg {
             width: 20px; height: 20px;
@@ -651,11 +660,12 @@
             border-color: rgba(255,255,255,0.2);
             transform: translateY(-2px);
         }
+        .arrow-btn-left  { left: 32px; }
+        .arrow-btn-right { right: 32px; }
         @media (max-width: 768px) {
-            .floating-arrows {
-                bottom: 24px;
-                right: 24px;
-            }
+            .arrow-btn { bottom: 32px; }
+            .arrow-btn-left  { left: 20px; }
+            .arrow-btn-right { right: 20px; }
         }
 
     </style>
@@ -2549,14 +2559,12 @@ Dublín 2027: costoso y exigente, pero con recompensas profesionales significati
     <div class="footer-copy">© 2026 Paradise Global High School. All rights reserved.</div>
 </footer>
 
-<div class="floating-arrows">
-    <button onclick="history.back()" class="arrow-btn" aria-label="Go Back">
-        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-    <button onclick="history.forward()" class="arrow-btn" aria-label="Go Forward">
-        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-    </button>
-</div>
+<button onclick="history.back()" class="arrow-btn arrow-btn-left" aria-label="Go Back">
+    <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+</button>
+<button onclick="history.forward()" class="arrow-btn arrow-btn-right" aria-label="Go Forward">
+    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+</button>
 
 </body>
 
