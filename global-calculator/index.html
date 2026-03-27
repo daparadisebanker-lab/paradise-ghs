@@ -8,6 +8,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<!-- ═══════════════════════════════════════════
+     FLOATING SIDE MENU
+     ═══════════════════════════════════════════ -->
+<nav class="floating-nav">
+    <div class="nav-links" style="display:flex;">
+        <div class="dropdown">
+            <span class="dropdown-title">GHS</span>
+            <div class="dropdown-content">
+                <a href="../paradise_features_comparison.html">Benchmark de Cursos</a>
+                <a href="../paradise_2026_academic_calendar.html">Calendario Académico</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <span class="dropdown-title">Ascend</span>
+            <div class="dropdown-content">
+                <a href="../paradise_ascend_consulting (1).html">Consultancy Portal</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
     <div class="hdr">
         <div class="hdr-brand">
             <span class="hdr-name">Global Calculator</span>
@@ -104,9 +125,42 @@
 
     </div>
 
-    <div class="footer"><p><strong>Ascend by Paradise International College</strong> · Proprietary Comparison Calculator<br>Data Model: 2027 Projections</p></div>
+    <!-- ═══════════════════════════════════════════
+         GLOBAL FOOTER & NAVIGATION ARROWS
+         ═══════════════════════════════════════════ -->
+    <footer class="global-footer">
+        <div class="footer-links">
+            <a href="../index.html">Paradise Landing</a>
+            <a href="../paradise_ascend_consulting (1).html">Ascend Portal</a>
+            <a href="../paradise_features_comparison.html">Course Benchmark</a>
+            <a href="../paradise_2026_academic_calendar.html">Academic Calendar</a>
+            <a href="index.html">Global Calculator</a>
+        </div>
+        <div class="footer-copy">© 2026 Paradise Global High School. All rights reserved.</div>
+    </footer>
+
+    <button onclick="history.back()" class="arrow-btn arrow-btn-left" aria-label="Go Back">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button onclick="history.forward()" class="arrow-btn arrow-btn-right" aria-label="Go Forward">
+        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
 
     <script src="data/app_data.js"></script>
     <script src="app.js"></script>
+    <script>
+        // ── Mobile Dropdown Touch Fix ──
+        document.querySelectorAll('.floating-nav .dropdown').forEach(function(dropdown) {
+            dropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isOpen = this.classList.contains('open');
+                document.querySelectorAll('.floating-nav .dropdown').forEach(d => d.classList.remove('open'));
+                if (!isOpen) this.classList.add('open');
+            });
+        });
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.floating-nav .dropdown').forEach(d => d.classList.remove('open'));
+        });
+    </script>
 </body>
 </html>
