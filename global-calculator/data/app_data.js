@@ -5,56 +5,43 @@ const APP_DATA = [
     "region": "Americas",
     "profiles": [
       {
-        "name": "Columbia / NYU (Privada Élite)",
+        "name": "Manhattan (Estudio Privado)",
         "costs": {
-          "housing": 1708,
-          "food": 0,
-          "transport": 125,
-          "health": 404,
-          "leisure": 354,
-          "tuition": 6208
+          "housing": 2800,
+          "food": 900,
+          "transport": 130,
+          "health": 350,
+          "leisure": 500,
+          "tuition": 0
         },
-        "totalMonth": 8800,
-        "totalMonthUSD": 8800
+        "totalMonth": 4680,
+        "totalMonthUSD": 4680
       },
       {
-        "name": "Fordham / Pace (Privada Media)",
+        "name": "Brooklyn / Williamsburg",
         "costs": {
-          "housing": 1792,
-          "food": 0,
-          "transport": 125,
-          "health": 367,
-          "leisure": 313,
-          "tuition": 4792
+          "housing": 2100,
+          "food": 700,
+          "transport": 130,
+          "health": 300,
+          "leisure": 400,
+          "tuition": 0
         },
-        "totalMonth": 7387,
-        "totalMonthUSD": 7387
+        "totalMonth": 3630,
+        "totalMonthUSD": 3630
       },
       {
-        "name": "CUNY (Pública NYC)",
+        "name": "Queens / NJ (Compartido)",
         "costs": {
-          "housing": 1750,
-          "food": 0,
-          "transport": 125,
-          "health": 313,
-          "leisure": 313,
-          "tuition": 1729
+          "housing": 1200,
+          "food": 550,
+          "transport": 160,
+          "health": 250,
+          "leisure": 300,
+          "tuition": 0
         },
-        "totalMonth": 4229,
-        "totalMonthUSD": 4229
-      },
-      {
-        "name": "SUNY (Pública Estado)",
-        "costs": {
-          "housing": 1438,
-          "food": 0,
-          "transport": 54,
-          "health": 271,
-          "leisure": 250,
-          "tuition": 1688
-        },
-        "totalMonth": 3700,
-        "totalMonthUSD": 3700
+        "totalMonth": 2460,
+        "totalMonthUSD": 2460
       }
     ]
   },
@@ -64,43 +51,43 @@ const APP_DATA = [
     "region": "Americas",
     "profiles": [
       {
-        "name": "Escenario 1: On-Campus (Residencial Harvard/MIT)",
+        "name": "Escenario 1: On-Campus (Residencial)",
         "costs": {
-          "housing": 1756,
-          "food": 1089,
+          "housing": 1400,
+          "food": 800,
           "transport": 50,
-          "health": 533,
-          "leisure": 550,
-          "tuition": 7378
+          "health": 300,
+          "leisure": 400,
+          "tuition": 0
         },
-        "totalMonth": 11356,
-        "totalMonthUSD": 11356
+        "totalMonth": 2950,
+        "totalMonthUSD": 2950
       },
       {
         "name": "Escenario 2: Off-Campus (Compartido/Austero)",
         "costs": {
-          "housing": 1600,
-          "food": 650,
-          "transport": 120,
-          "health": 533,
-          "leisure": 522,
-          "tuition": 7378
+          "housing": 1100,
+          "food": 500,
+          "transport": 90,
+          "health": 250,
+          "leisure": 350,
+          "tuition": 0
         },
-        "totalMonth": 10803,
-        "totalMonthUSD": 10803
+        "totalMonth": 2290,
+        "totalMonthUSD": 2290
       },
       {
-        "name": "Escenario 3: Off-Campus (Independiente/Moderado)",
+        "name": "Escenario 3: Off-Campus (Independiente)",
         "costs": {
-          "housing": 3200,
-          "food": 1000,
-          "transport": 200,
-          "health": 533,
-          "leisure": 944,
-          "tuition": 7378
+          "housing": 1900,
+          "food": 750,
+          "transport": 90,
+          "health": 300,
+          "leisure": 600,
+          "tuition": 0
         },
-        "totalMonth": 13256,
-        "totalMonthUSD": 13256
+        "totalMonth": 3640,
+        "totalMonthUSD": 3640
       }
     ]
   },
@@ -110,17 +97,17 @@ const APP_DATA = [
     "region": "Americas",
     "profiles": [
       {
-        "name": "Costo Mensual (USD)",
+        "name": "Presupuesto Estándar (Westwood/USC Area)",
         "costs": {
-          "housing": 4100,
-          "food": 925,
-          "transport": 825,
-          "health": 300,
-          "leisure": 340,
+          "housing": 1800,
+          "food": 650,
+          "transport": 350,
+          "health": 250,
+          "leisure": 400,
           "tuition": 0
         },
-        "totalMonth": 6490,
-        "totalMonthUSD": 6490
+        "totalMonth": 3450,
+        "totalMonthUSD": 3450
       }
     ]
   },
@@ -189,17 +176,17 @@ const APP_DATA = [
     "region": "Americas",
     "profiles": [
       {
-        "name": "Rango de Costo Anual",
+        "name": "Costo Mensual Estimado",
         "costs": {
-          "housing": 1354,
-          "food": 750,
-          "transport": 0,
-          "health": 892,
-          "leisure": 417,
-          "tuition": 5703
+          "housing": 2100,
+          "food": 550,
+          "transport": 150,
+          "health": 350,
+          "leisure": 450,
+          "tuition": 0
         },
-        "totalMonth": 9116,
-        "totalMonthUSD": 9116
+        "totalMonth": 3600,
+        "totalMonthUSD": 3600
       }
     ]
   },
@@ -209,17 +196,17 @@ const APP_DATA = [
     "region": "Americas",
     "profiles": [
       {
-        "name": "Costo Mensual Est.",
+        "name": "Costo Mensual Est. (NCA)",
         "costs": {
-          "housing": 1650,
-          "food": 750,
-          "transport": 650,
-          "health": 395,
-          "leisure": 660,
+          "housing": 900,
+          "food": 450,
+          "transport": 150,
+          "health": 250,
+          "leisure": 250,
           "tuition": 0
         },
-        "totalMonth": 4105,
-        "totalMonthUSD": 4105
+        "totalMonth": 2000,
+        "totalMonthUSD": 2000
       }
     ]
   },
@@ -639,41 +626,41 @@ const APP_DATA = [
       {
         "name": "Perfil Austero (UANL / Público)",
         "costs": {
-          "housing": 4500,
+          "housing": 6000,
           "food": 4700,
           "transport": 1200,
-          "health": 0,
-          "leisure": 16700,
+          "health": 800,
+          "leisure": 2500,
           "tuition": 0
         },
-        "totalMonth": 27100,
-        "totalMonthUSD": 1599
+        "totalMonth": 15200,
+        "totalMonthUSD": 890
       },
       {
         "name": "Perfil Medio (Tec/UDEM Compartido)",
         "costs": {
           "housing": 9500,
-          "food": 9000,
-          "transport": 4000,
+          "food": 7000,
+          "transport": 2500,
           "health": 1300,
-          "leisure": 39400,
+          "leisure": 4500,
           "tuition": 0
         },
-        "totalMonth": 63200,
-        "totalMonthUSD": 3729
+        "totalMonth": 24800,
+        "totalMonthUSD": 1450
       },
       {
         "name": "Perfil Alto (Tec/UDEM Privado)",
         "costs": {
-          "housing": 22000,
-          "food": 17500,
-          "transport": 7500,
-          "health": 3500,
-          "leisure": 84500,
+          "housing": 16000,
+          "food": 10500,
+          "transport": 4500,
+          "health": 2500,
+          "leisure": 9000,
           "tuition": 0
         },
-        "totalMonth": 135000,
-        "totalMonthUSD": 7965
+        "totalMonth": 42500,
+        "totalMonthUSD": 2500
       }
     ]
   },
