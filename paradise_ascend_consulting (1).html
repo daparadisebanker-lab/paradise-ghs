@@ -1301,6 +1301,18 @@
                 }
             });
 
+            // ── Google Sheets logging (fire-and-forget) ──────
+            // STEP: Replace the placeholder below with your Google Apps Script Web App URL
+            const SHEETS_WEBHOOK = 'YOUR_APPS_SCRIPT_URL_HERE';
+            if (SHEETS_WEBHOOK !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+                fetch(SHEETS_WEBHOOK, {
+                    method: 'POST',
+                    // Apps Script requires text/plain for no-cors cross-origin POST
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ fields })
+                }).catch(() => {}); // Silent — never block the form/PDF/WhatsApp
+            }
+
             // ── Render each field ────────────────────────────
             doc.setFontSize(10);
             fields.forEach((field, idx) => {
