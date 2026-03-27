@@ -789,7 +789,7 @@
                 <a href="paradise_ascend_consulting (1).html">Consultancy Portal</a>
             </div>
         </div>
-    
+    </div>
 </nav>
 
 
@@ -1017,6 +1017,19 @@
 <button onclick="history.forward()" class="arrow-btn arrow-btn-right" aria-label="Go Forward">
     <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
 </button>
-
+<script>
+    // Mobile dropdown touch fix
+    document.querySelectorAll('.floating-nav .dropdown').forEach(function(dropdown) {
+        dropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = this.classList.contains('open');
+            document.querySelectorAll('.floating-nav .dropdown').forEach(d => d.classList.remove('open'));
+            if (!isOpen) this.classList.add('open');
+        });
+    });
+    document.addEventListener('click', function() {
+        document.querySelectorAll('.floating-nav .dropdown').forEach(d => d.classList.remove('open'));
+    });
+</script>
 </body>
 </html>
